@@ -1,22 +1,31 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 
-interface ToDoFormProps {
+interface TodoFormProps {
     onAdd(title: string): void
 }
 
-export const ToDoForm: React.FC<ToDoFormProps> = (props) => {
+export const TodoForm: React.FC<TodoFormProps> = props => {
     const ref = useRef<HTMLInputElement>(null)
 
     const keyPressHandler = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
-            props.onAdd (ref.current!.value)
+            props.onAdd(ref.current!.value)
             ref.current!.value = ''
         }
     }
+
     return (
-        <div className='input-field'>
-            <input onKeyPress={keyPressHandler} ref={ref} type="text" id='title'/>
-            <label htmlFor="title" className='active' placeholder='Введите название дела'>Введите название дела</label>
+        <div className="input-field mt2">
+            <input
+                ref={ref}
+                type="text"
+                id="title"
+                placeholder="Введите название дела"
+                onKeyPress={keyPressHandler}
+            />
+            <label htmlFor="title" className="active">
+                Введите название дела
+            </label>
         </div>
     )
 }
